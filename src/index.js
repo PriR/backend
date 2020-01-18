@@ -1,9 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const http = require('http'); // para usar socket
 const routes = require('./routes');
+const { setupWebsocket } = require('./websocket');
 
 const app = express();
+const server = http.Server(app); // http fora do express
+
+setupWebsocket(server);
 
 mongoose.connect('mongodb+srv://priscila:priscila@cluster0-f9yq3.mongodb.net/week10?retryWrites=true&w=majority', { 
   useNewUrlParser: true,
